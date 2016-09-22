@@ -1,0 +1,30 @@
+@import './variables';
+
+#feed{
+
+  position: absolute;
+  left: 133px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+
+  .feed {
+    @extend .fluze;
+    @extend .drop-shadow;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    height: 300px;
+    width: 300px;
+    margin-right: 32px;
+    margin-bottom: 55px;
+
+    .avatar {
+      display: block;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+  }
+}
