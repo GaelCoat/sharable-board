@@ -1,24 +1,17 @@
-var Router = Marionette.Object.extend({
 
-  routes: {
-    'auth':'auth',
-    'home':'home',
+var Router = Marionette.AppRouter.extend({
+
+  initialize: function(Controller) {
+
+    this.controller = Controller
   },
 
-  redirect: function(path, params){
-
-    var fn = this.routes[path];
-    this[fn](params);
+  appRoutes: {
+    '':'home',
+    'board':'board',
   },
 
-  home: function() { return this.loadView('./views/home'); },
-  auth: function() { return this.loadView('./views/auth'); },
-
-  loadView: function(path, params) {
-
-    this.triggerMethod('view:load', path, params);
-    return this;
-  }
 });
+
 
 module.exports = Router;

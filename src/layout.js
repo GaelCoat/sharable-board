@@ -1,12 +1,12 @@
 var Polymer = require('./directives/polymer');
 
-module.exports = Marionette.LayoutView.extend({
+module.exports = Marionette.View.extend({
 
   el: 'body',
 
   regions: {
-    header: '#header',
-    content: '#layout-view'
+    //header: '#header',
+    content: '#layout'
   },
 
   events: {
@@ -15,28 +15,14 @@ module.exports = Marionette.LayoutView.extend({
   },
 
   polymer: function(e) { return Polymer(e) },
+  home: function() { return this.loadView('./views/home'); },
+  board: function() { return this.loadView('./views/board'); },
 
-  redirect: function(e) {
+  loadView: function(path, params) {
 
-    var path = this.$el.find(e.currentTarget).data('view');
-    var params = this.$el.find(e.currentTarget).data('params');
-    return App.redirect(path, params);
-  },
-
-  onBeforeShow: function() {
-
-    this.getRegion('header').show(new HeaderView());
-    return this;
-  },
-
-  load: function(path, params) {
-
-    var that = this;
     var subview = require(path);
     var view = new subview(params);
-
-    this.getRegion('content').empty();
-    this.getRegion('content').show(view);
+    this.showChildView('content', view);
 
     return this;
   }
